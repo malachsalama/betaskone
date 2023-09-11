@@ -46,15 +46,15 @@ app.get("/api", async (req, res) => {
     });
 
     // Update the MongoDB collection
-    const query = User.findOneAndUpdate(
-      { slack_name: slackName, track: track },
-      { $set: { utc_time: todayInUTC, current_day: todayDayOfWeek } },
-      { returnOriginal: false },
-      {
-        timeout: 30000,
-        new: true,
-      }
-    ).select("-_id");
+    const query = User.find(
+      { slack_name: slackName, track: track }
+      // { $set: { utc_time: todayInUTC, current_day: todayDayOfWeek } },
+      // { returnOriginal: false },
+      // {
+      //   timeout: 30000,
+      //   new: true,
+      // }
+    );
     const result = await query.exec();
     res.json(result);
   } catch (error) {
