@@ -47,7 +47,11 @@ app.get("/api", async (req, res) => {
     const query = User.findOneAndUpdate(
       { slack_name: slackName, track: track },
       { $set: { utc_time: todayInUTC, current_day: todayDayOfWeek } },
-      { returnOriginal: false }
+      { returnOriginal: false },
+      {
+        timeout: 30000,
+        new: true,
+      }
     ).select("-_id");
     const result = await query.exec();
     res.json(result);
