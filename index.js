@@ -49,6 +49,7 @@ app.get("/api", async (req, res) => {
       { $set: { utc_time: todayInUTC, current_day: todayDayOfWeek } },
       {
         returnOriginal: false,
+        timeout: 80000, // Increase the timeout here
         new: true,
       }
     );
