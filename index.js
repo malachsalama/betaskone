@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const express = require("express");
-const moment = require("moment");
 const app = express();
 const port = 3000;
 require("dotenv").config();
@@ -45,7 +44,6 @@ app.get("/api", async (req, res) => {
     });
 
     // Update the MongoDB collection
-
     const query = User.findOneAndUpdate(
       { slack_name: slackName, track: track },
       { $set: { utc_time: todayInUTC, current_day: todayDayOfWeek } },
