@@ -37,6 +37,8 @@ app.get("/api", async (req, res) => {
     const slackName = req.query.slack_name;
     const track = req.query.track;
 
+    console.log(slackName, track);
+
     // Get the current UTC time and day of the week
     const todayInUTC = new Date().toISOString();
     const todayDayOfWeek = new Date().toLocaleString("en-US", {
