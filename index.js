@@ -50,7 +50,7 @@ app.get("/api", async (req, res) => {
       { returnOriginal: false }
     ).select("-_id");
     const result = await query.exec();
-    console.log(result);
+    res.json(result);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
