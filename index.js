@@ -59,7 +59,7 @@ app.get("/api", async (req, res) => {
     res.json(result);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ error: "Internal Server Error on beta 9" });
   }
 });
 
