@@ -37,8 +37,6 @@ app.get("/api", async (req, res) => {
     const slackName = req.query.slack_name;
     const track = req.query.track;
 
-    console.log(slackName, track);
-
     // Get the current UTC time and day of the week
     const todayInUTC = new Date().toISOString();
     const todayDayOfWeek = new Date().toLocaleString("en-US", {
@@ -46,20 +44,20 @@ app.get("/api", async (req, res) => {
     });
 
     // Update the MongoDB collection
-    const query = User.find(
-      { slack_name: slackName, track: track }
-      // { $set: { utc_time: todayInUTC, current_day: todayDayOfWeek } },
-      // { returnOriginal: false },
-      // {
-      //   timeout: 30000,
-      //   new: true,
-      // }
+    const query = User.findOneAndUpdate(
+      { slack_name: slackName, track: track },
+      { $set: { utc_time: todayInUTC, current_day: todayDayOfWeek } },
+      {
+        returnOriginal: false,
+        new: true,
+      }
     );
+
     const result = await query.exec();
     res.json(result);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Internal Server Error on beta 9" });
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
